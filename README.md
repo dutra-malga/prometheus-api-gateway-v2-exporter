@@ -28,7 +28,7 @@ Usage:
     export API_STAGE="\$default"
 
 Command:
-    prometheus-api-gateway-http-exporter
+    prometheus-api-gateway-v2-exporter
 ```
 
 <hr>
@@ -36,5 +36,5 @@ Command:
 ## Running the exporter
 
 ```bash
-prometheus-api-gateway-http-exporter
+prometheus-api-gateway-v2-exporter
 ```
