@@ -1,16 +1,16 @@
-# Maintainer: Gabriel M. Dutra <bsdutra@proton.me>
+"""
+    Entrypoint to start prometheus HTTP server
+"""
 
 #!/usr/bin/env python
 
-import boto3
 import sys
 import time
 import os
 
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from prometheus_client import start_http_server
 from src.get_metrics import ApiGatewayMetrics
 from src.prom_metrics import PromMetrics
-from prometheus_client import start_http_server
 
 REFRESH_INTERVAL = int(os.environ.get("REFRESH_INTERVAL", 60))
 PORT = int(os.environ.get("PORT", 8200))
@@ -19,7 +19,13 @@ API_ID = os.environ.get("API_ID")
 API_STAGE = os.environ.get("API_STAGE", "$default")
 MAX_WORKERS = int(os.environ.get("MAX_WORKERS", 20))
 
+
 def main():
+    """
+        ApiGatewayMetrics - Get AWS API Gateway metrics
+        PromMetrics - Create metrics to prometheus
+    """
+
     apigw = ApiGatewayMetrics(API_ID, API_STAGE)
     prom = PromMetrics()
 
